@@ -149,7 +149,6 @@ second_reviewer.rate_hw(student_2, 'Python', 10)
 second_reviewer.rate_hw(student_2, 'Python', 10)
 second_reviewer.rate_hw(student_2, 'Python', 10)
 
-
 print(student_1.grades)
 print(student_2.grades)
 print(first_lecturer.eval)
@@ -160,8 +159,32 @@ print(first_lecturer)
 print(second_lecturer)
 print(student_1)
 print(student_2)
+
 print(student_1 < student_2)
 print(first_lecturer > second_lecturer)
 
 students_list = [student_1, student_2]
 lecturers_list = [first_lecturer, second_lecturer]
+
+def avg_students (students : list, course):
+    total = 0
+    length = 0
+    for student in students:
+        if course in student.courses_in_progress or course in student.finished_courses:
+            total += sum(student.grades[course])
+            length += len(student.grades[course])
+    return f"Средняя оценка студентов за курс {course}: {round(total / length, 2)}"
+
+def avg_lecturers(lecturers: list, course):
+    total = 0
+    length = 0
+    for lecturer in lecturers:
+        if course in lecturer.courses_attached:
+            total += sum(lecturer.eval[course])
+            length += len(lecturer.eval[course])
+    return f"Средняя оценка лекторов за лекции по курсу {course}: {round(total / length, 2)}"
+
+
+print(avg_lecturers(lecturers_list, 'Python'))
+print(avg_students(students_list, 'Python'))
+print(avg_students(students_list, 'Введение в программирование'))
