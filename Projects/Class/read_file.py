@@ -26,7 +26,8 @@ def get_shop_list_by_dishes(dishes: list, person_count: int):
                     new_line = {ingredient['ingredient_name'] : {'measure':  ingredient['measure'],'quantity': int(ingredient['quantity'])*person_count}}
                     shopping_list.update(new_line)
                 else:
-                    shopping_list[ingredient["ingredient_name"]]["quantity"] += ingredient["quantity"]*person_count
+                    item = ingredient["ingredient_name"]
+                    shopping_list[item]["quantity"] += int(ingredient["quantity"])*person_count
     return shopping_list
 
 print(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 4))
