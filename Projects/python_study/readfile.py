@@ -34,3 +34,28 @@ example_book = {
     {'ingredient_name': 'Сыр гауда', 'quantity': 100, 'measure': 'г'},
     ]
   }
+
+def get_shop_list_by_dishes(dishes: list, person_count: int):
+    cook_book = get_recipes('recipes.txt')
+    shopping_list = {}
+    for dish in dishes:
+        if dish in cook_book.keys():
+            for ingredient in cook_book[dish]:
+                if ingredient['ingredient_name'] not in shopping_list.keys():
+                    new_line = {ingredient['ingredient_name'] : {'measure':  ingredient['measure'],'quantity': int(ingredient['quantity'])*person_count}}
+                    shopping_list.update(new_line)
+                else:
+                    item = ingredient["ingredient_name"]
+                    shopping_list[item]["quantity"] += int(ingredient["quantity"])*person_count
+    return shopping_list
+
+print(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 4))
+
+example_shopping = {
+  'Картофель': {'measure': 'кг', 'quantity': 2},
+  'Молоко': {'measure': 'мл', 'quantity': 200},
+  'Помидор': {'measure': 'шт', 'quantity': 4},
+  'Сыр гауда': {'measure': 'г', 'quantity': 200},
+  'Яйцо': {'measure': 'шт', 'quantity': 4},
+  'Чеснок': {'measure': 'зубч', 'quantity': 6}
+}
