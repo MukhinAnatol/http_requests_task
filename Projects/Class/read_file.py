@@ -16,17 +16,17 @@ def get_recipes(file_name: str):
 
 #print(get_recipes('recipes.txt'))
 
-def get_shop_list_by_dishes(dishes : list):
+def get_shop_list_by_dishes(dishes: list, person_count: int):
     cook_book = get_recipes('recipes.txt')
     shopping_list = {}
     for dish in dishes:
         if dish in cook_book.keys():
             for ingredient in cook_book[dish]:
                 if ingredient['ingredient_name'] not in shopping_list.keys():
-                    new_line = {ingredient['ingredient_name'] : {'measure':  ingredient['measure'],'quantity': ingredient['quantity']}}
+                    new_line = {ingredient['ingredient_name']: {'measure':  ingredient['measure'],'quantity': int(ingredient['quantity'])*person_count}}
                     shopping_list.update(new_line)
     return shopping_list
-print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет']))
+print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 4))
 
 example_shopping = {
   'Картофель': {'measure': 'кг', 'quantity': 2},
