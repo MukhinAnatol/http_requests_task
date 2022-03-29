@@ -26,7 +26,7 @@ def get_shop_list_by_dishes(dishes: list, person_count: int):
                     new_line = {ingredient['ingredient_name']: {'measure':  ingredient['measure'],'quantity': int(ingredient['quantity'])*person_count}}
                     shopping_list.update(new_line)
     return shopping_list
-print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 4))
+print(get_shop_list_by_dishes(['Утка по-пекински', 'Омлет'], 4))
 
 example_shopping = {
   'Картофель': {'measure': 'кг', 'quantity': 2},
