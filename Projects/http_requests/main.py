@@ -13,7 +13,7 @@ if __name__ == '__main__':
     Thanos = Superhero('Thanos', SH_Token)
     print(Hulk.compare_stat([Captain, Thanos]))
     #Задача №2
-    path_to_file = 'C:\\Users\docs\photo.jpg'
-    file = "test_path/photo.jpg"
+    file_on_PC = 'C:\\Users\docs\photo.jpg'
+    file_on_disk = "test_path/photo.jpg"
     Ya_disk_uploader = YaUploader(Ya_Token)
-    Ya_disk_uploader.upload(file, path_to_file)
+    Ya_disk_uploader.upload(file_on_disk, file_on_PC)
