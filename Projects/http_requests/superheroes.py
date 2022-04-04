@@ -10,6 +10,7 @@ class Superhero:
         url = f'https://superheroapi.com/api/{self.token}/search/{self.hero_name}'
         response = requests.get(url)
         result = response.json()['results'][0]
+        #pprint(result)
         hero_stat = 'intelligence'
         stat = result['powerstats'][hero_stat]
         #pprint(stat)
@@ -23,16 +24,7 @@ class Superhero:
             if isinstance(hero, Superhero):
                 heroes_stats[hero.hero_name] = int(hero.get_hero_stat())
                 max_val = list(max(heroes_stats.items(), key=lambda x: x[1]))
-                return f'{max_val[0]} - самый умный герой с показателем интелекта {max_val[1]}'
+                return f'{max_val[0]} - самый умный герой с показателем интелекта {max_val[1]}.'
 
-if __name__ == '__main__':
-    Token = '2619421814940190'
-    Hulk = Superhero('Hulk', Token)
-    Captain = Superhero('Captain America', Token)
-    Thanos = Superhero('Thanos', Token)
-    print(Hulk.compare_stat([Captain, Thanos]))
-#Searcher.get_hero_stats('Intelligence')
 
-#.find_superhero_id('Captain America')
-#Searcher.find_superhero_id('Thanos')
 
