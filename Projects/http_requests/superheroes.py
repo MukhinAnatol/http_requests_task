@@ -1,35 +1,37 @@
 import requests
 from pprint import pprint
-Token = '2619421814940190'
 
-class Superhero_searcher:
-    def __init__(self, token):
+class Superhero:
+    def __init__(self, hero_name, token):
+        self.hero_name = hero_name
         self.token = token
 
-    def find_hero_id(self, hero_name: str):
-        url = f'https://superheroapi.com/api/{self.token}/search/{hero_name}'
+    def get_hero_stat(self):
+        url = f'https://superheroapi.com/api/{self.token}/search/{self.hero_name}'
         response = requests.get(url)
-        result = response.json()
-        list = result['results']
-        #pprint(list)
-        for item in list:
-            for key, value in item.items():
-                if 'id' == key:
-                    pprint(item['id'])
-                    return item['id']
+        result = response.json()['results'][0]
+        hero_stat = 'intelligence'
+        stat = result['powerstats'][hero_stat]
+        #pprint(stat)
+        return stat
 
-    def get_hero_stats(self, hero_name: str, stat):
-        url = f'https://superheroapi.com/api/{self.token}/{self.find_hero_id}/powerstats/{stat}'
-        response = requests.get(url)
-        result = response.json()
-        pprint(result)
-        return result
+    def compare_stat(self, heroes_list: list):
+        heroes_stats = {}
+        stat = self.get_hero_stat()
+        heroes_stats[self.hero_name] = int(stat)
+        for hero in heroes_list:
+            if isinstance(hero, Superhero):
+                heroes_stats[hero.hero_name] = int(hero.get_hero_stat())
+                max_val = list(max(heroes_stats.items(), key=lambda x: x[1]))
+                return f'{max_val[0]} - самый умный герой с показателем интелекта {max_val[1]}'
 
-    #def find_superhero_stats(self, ):
-
-Searcher = Superhero_searcher(Token)
-Searcher.find_hero_id('Hulk')
-Searcher.get_hero_stats('Hulk', 'Intelligence')
+if __name__ == '__main__':
+    Token = '2619421814940190'
+    Hulk = Superhero('Hulk', Token)
+    Captain = Superhero('Captain America', Token)
+    Thanos = Superhero('Thanos', Token)
+    print(Hulk.compare_stat([Captain, Thanos]))
+#Searcher.get_hero_stats('Intelligence')
 
 #.find_superhero_id('Captain America')
 #Searcher.find_superhero_id('Thanos')

@@ -2,6 +2,8 @@ from pprint import pprint
 
 import requests
 
+from
+
 from Ya_disc_upload import YaUploader
 
 with open('token_ya_disc.txt', 'r') as f:
